@@ -1,0 +1,53 @@
+name: Automated Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*' # Triggers the automation workflow only when you push a tag starting with 'v'
+
+jobs:
+  publish-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install uv Env Manager
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "latest"
+          enable-cache: true
+
+      - name: Set up Python Environment
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Build Distribution Packages
+        run: |
+          uv build
+
+      - name: Create GitHub Release and Upload Assets
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/*.whl
+            dist/*.tar.gz
+          name: CanLens ${{ github.ref_name }}
+          body: |
+            ### CanLens Automated Workspace Release `${{ github.ref_name }}`
+            
+            A professional terminal-based CAN Investigation Recorder & Telemetry Workstation built with Python, Textual, and `python-can`.
+            
+            #### Automated Architecture Artifacts Included:
+            * Standardized python wheel bundle (`.whl`)
+            * Source code tarball distribution (`.tar.gz`)
+            
+            #### Installation Command:
+            ```bash
+            uv tool install [https://github.com/$](https://github.com/$){{ github.repository }}/releases/download/${{ github.ref_name }}/canlens-0.1.0-py3-none-any.whl
+            ```
+        draft: false
+        prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
