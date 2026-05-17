@@ -6,10 +6,10 @@ from textual.containers import Vertical
 from textual.screen import Screen
 from textual.widgets import Footer, Header, Label, ListItem, ListView, RichLog
 
-from capture.can_reader import CanReader
-from capture.recorder import CanRecorder
-from capture.session_writer import SessionWriter
-from ui.widgets.live_table import LiveCanTable
+from canlens.capture.can_reader import CanReader
+from canlens.capture.recorder import CanRecorder
+from canlens.capture.session_writer import SessionWriter
+from canlens.ui.widgets.live_table import LiveCanTable
 
 
 class MainDashboard(Screen):

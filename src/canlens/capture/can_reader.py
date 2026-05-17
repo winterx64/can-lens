@@ -4,7 +4,7 @@ import time
 
 import can
 
-from .models import CanFrame
+from canlens.capture.models import CanFrame
 
 
 class CanReader:

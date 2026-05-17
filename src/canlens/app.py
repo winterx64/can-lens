@@ -2,8 +2,8 @@ import asyncio
 
 from textual.app import App
 
-from capture.can_reader import CanReader
-from ui.screens.main_screen import MainDashboard
+from canlens.capture.can_reader import CanReader
+from canlens.ui.screens.main_screen import MainDashboard
 
 
 class CanLensApplication(App):

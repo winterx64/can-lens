@@ -1,6 +1,6 @@
 from textual.widgets import DataTable
 
-from capture.models import CanFrame
+from canlens.capture.models import CanFrame
 
 
 class LiveCanTable(DataTable):
