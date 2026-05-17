@@ -27,6 +27,12 @@ jobs:
         run: |
           uv build
 
+      - name: Parse Clean Version String
+        id: version
+        run: |
+          CLEAN_VER=$(echo "${{ github.ref_name }}" | sed 's/^v//')
+          echo "WHEEL_VERSION=$CLEAN_VER" >> $GITHUB_OUTPUT
+
       - name: Create GitHub Release and Upload Assets
         uses: softprops/action-gh-release@v2
         with:
@@ -34,19 +40,20 @@ jobs:
             dist/*.whl
             dist/*.tar.gz
           name: CanLens ${{ github.ref_name }}
+          draft: false
+          prerelease: false
           body: |
             ### CanLens Automated Workspace Release `${{ github.ref_name }}`
-            
+
             A professional terminal-based CAN Investigation Recorder & Telemetry Workstation built with Python, Textual, and `python-can`.
-            
+
             #### Automated Architecture Artifacts Included:
             * Standardized python wheel bundle (`.whl`)
             * Source code tarball distribution (`.tar.gz`)
-            
+
             #### Installation Command:
             ```bash
-            uv tool install [https://github.com/$](https://github.com/$){{ github.repository }}/releases/download/${{ github.ref_name }}/canlens-0.1.0-py3-none-any.whl
-            
+            uv tool install https://github.com/${{ github.repository }}/releases/download/${{ github.ref_name }}/canlens-${{ steps.version.outputs.WHEEL_VERSION }}-py3-none-any.whl
             ```
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
