@@ -1,6 +1,6 @@
 [project]
 name = "canlens"
-version = "0.1.1"
+version = "0.1.2"
 description = "A professional terminal-based CAN Investigation Recorder & Telemetry Workstation"
 readme = "README.md"
 requires-python = ">=3.11"
