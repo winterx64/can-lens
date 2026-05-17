@@ -47,7 +47,5 @@ jobs:
             ```bash
             uv tool install [https://github.com/$](https://github.com/$){{ github.repository }}/releases/download/${{ github.ref_name }}/canlens-0.1.0-py3-none-any.whl
             ```
-        draft: false
-        prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
