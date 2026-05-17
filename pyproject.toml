@@ -1,0 +1,21 @@
+[project]
+name = "canlens"
+version = "0.1.0"
+description = "A professional terminal-based CAN Investigation Recorder & Telemetry Workstation"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "python-can>=4.3.1",
+    "rich>=13.7.0",
+    "textual>=0.85.0",
+]
+
+[project.scripts]
+canlens = "main:run_app"
+
+[tool.uv]
+package = true
+
+[tool.setuptools]
+packages = ["capture", "ui"]
+py-modules = ["main"]
